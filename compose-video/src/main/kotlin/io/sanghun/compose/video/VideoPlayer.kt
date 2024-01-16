@@ -48,6 +48,7 @@ import androidx.media3.common.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE
 import androidx.media3.common.util.RepeatModeUtil.REPEAT_TOGGLE_MODE_ONE
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.DefaultHttpDataSource
+import androidx.media3.datasource.HttpDataSource
 import androidx.media3.datasource.cache.CacheDataSource
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
@@ -99,6 +100,7 @@ import kotlinx.coroutines.delay
  * @param enablePipWhenBackPressed With [enablePip] is `true`, set whether to enable PIP mode even when you press Back. Default is false.
  * @param handleAudioFocus Set whether to handle the video playback control automatically when it is playing in PIP mode and media is played in another app. Default is true.
  * @param playerInstance Return exoplayer instance. This instance allows you to add [androidx.media3.exoplayer.analytics.AnalyticsListener] to receive various events from the player.
+ * @param httpDataSourceFactory set the HttpDataSourceFactory.
  */
 @SuppressLint("SourceLockedOrientationActivity", "UnsafeOptInUsageError")
 @Composable
@@ -122,6 +124,9 @@ fun VideoPlayer(
     enablePipWhenBackPressed: Boolean = false,
     handleAudioFocus: Boolean = true,
     playerInstance: ExoPlayer.() -> Unit = {},
+    httpDataSourceFactory: HttpDataSource.Factory = remember {
+        DefaultHttpDataSource.Factory()
+    },
 ) {
     val context = LocalContext.current
     var currentTime by remember { mutableStateOf(0L) }
@@ -129,8 +134,6 @@ fun VideoPlayer(
     var mediaSession = remember<MediaSession?> { null }
 
     val player = remember {
-        val httpDataSourceFactory = DefaultHttpDataSource.Factory()
-
         ExoPlayer.Builder(context)
             .setSeekBackIncrementMs(seekBeforeMilliSeconds)
             .setSeekForwardIncrementMs(seekAfterMilliSeconds)
@@ -148,6 +151,8 @@ fun VideoPlayer(
                         .setCache(cache)
                         .setUpstreamDataSourceFactory(DefaultDataSource.Factory(context, httpDataSourceFactory))
                     setMediaSourceFactory(DefaultMediaSourceFactory(cacheDataSourceFactory))
+                }else {
+                    setMediaSourceFactory(DefaultMediaSourceFactory(httpDataSourceFactory))
                 }
             }
             .build()
