@@ -13,11 +13,25 @@ package io.sanghun.compose.video {
     method public static io.sanghun.compose.video.RepeatMode toRepeatMode(int);
   }
 
+  @androidx.compose.runtime.Stable public enum ResizeMode {
+    method public static io.sanghun.compose.video.ResizeMode valueOf(String name) throws java.lang.IllegalArgumentException;
+    method public static io.sanghun.compose.video.ResizeMode[] values();
+    enum_constant public static final io.sanghun.compose.video.ResizeMode FILL;
+    enum_constant public static final io.sanghun.compose.video.ResizeMode FIT;
+    enum_constant public static final io.sanghun.compose.video.ResizeMode FIXED_HEIGHT;
+    enum_constant public static final io.sanghun.compose.video.ResizeMode FIXED_WIDTH;
+    enum_constant public static final io.sanghun.compose.video.ResizeMode ZOOM;
+  }
+
+  public final class ResizeModeKt {
+    method public static io.sanghun.compose.video.ResizeMode toResizeMode(int);
+  }
+
   public final class VideoPlayerFullScreenDialogKt {
   }
 
   public final class VideoPlayerKt {
-    method @androidx.compose.runtime.Composable public static void VideoPlayer(optional androidx.compose.ui.Modifier modifier, java.util.List<? extends io.sanghun.compose.video.uri.VideoPlayerMediaItem> mediaItems, optional boolean handleLifecycle, optional boolean autoPlay, optional boolean usePlayerController, optional io.sanghun.compose.video.controller.VideoPlayerControllerConfig controllerConfig, optional long seekBeforeMilliSeconds, optional long seekAfterMilliSeconds, optional io.sanghun.compose.video.RepeatMode repeatMode, optional @FloatRange(from=0.0, to=1.0) float volume, optional kotlin.jvm.functions.Function1<? super java.lang.Long,kotlin.Unit> onCurrentTimeChanged, optional androidx.compose.ui.window.SecureFlagPolicy fullScreenSecurePolicy, optional kotlin.jvm.functions.Function0<kotlin.Unit> onFullScreenEnter, optional kotlin.jvm.functions.Function0<kotlin.Unit> onFullScreenExit, optional boolean enablePip, optional boolean enablePipWhenBackPressed, optional boolean handleAudioFocus, optional kotlin.jvm.functions.Function1<? super androidx.media3.exoplayer.ExoPlayer,kotlin.Unit> playerInstance);
+    method @androidx.compose.runtime.Composable public static void VideoPlayer(optional androidx.compose.ui.Modifier modifier, java.util.List<? extends io.sanghun.compose.video.uri.VideoPlayerMediaItem> mediaItems, optional boolean handleLifecycle, optional boolean autoPlay, optional boolean usePlayerController, optional io.sanghun.compose.video.controller.VideoPlayerControllerConfig controllerConfig, optional long seekBeforeMilliSeconds, optional long seekAfterMilliSeconds, optional io.sanghun.compose.video.RepeatMode repeatMode, optional io.sanghun.compose.video.ResizeMode resizeMode, optional @FloatRange(from=0.0, to=1.0) float volume, optional kotlin.jvm.functions.Function1<? super java.lang.Long,kotlin.Unit> onCurrentTimeChanged, optional androidx.compose.ui.window.SecureFlagPolicy fullScreenSecurePolicy, optional kotlin.jvm.functions.Function0<kotlin.Unit> onFullScreenEnter, optional kotlin.jvm.functions.Function0<kotlin.Unit> onFullScreenExit, optional boolean enablePip, optional boolean enablePipWhenBackPressed, optional boolean handleAudioFocus, optional kotlin.jvm.functions.Function1<? super androidx.media3.exoplayer.ExoPlayer,kotlin.Unit> playerInstance, optional androidx.media3.datasource.HttpDataSource.Factory httpDataSourceFactory);
   }
 
 }

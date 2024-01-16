@@ -63,8 +63,8 @@ import io.sanghun.compose.video.uri.VideoPlayerMediaItem
 import io.sanghun.compose.video.uri.toUri
 import io.sanghun.compose.video.util.findActivity
 import io.sanghun.compose.video.util.setFullScreen
-import java.util.*
 import kotlinx.coroutines.delay
+import java.util.*
 
 /**
  * [VideoPlayer] is UI component that can play video in Jetpack Compose. It works based on ExoPlayer.
@@ -151,7 +151,7 @@ fun VideoPlayer(
                         .setCache(cache)
                         .setUpstreamDataSourceFactory(DefaultDataSource.Factory(context, httpDataSourceFactory))
                     setMediaSourceFactory(DefaultMediaSourceFactory(cacheDataSourceFactory))
-                }else {
+                } else {
                     setMediaSourceFactory(DefaultMediaSourceFactory(httpDataSourceFactory))
                 }
             }
@@ -252,7 +252,7 @@ fun VideoPlayer(
         usePlayerController = usePlayerController,
         handleLifecycle = handleLifecycle,
         enablePip = enablePip,
-        surfaceResizeMode = resizeMode
+        surfaceResizeMode = resizeMode,
     )
 
     if (isFullScreenModeEntered) {
